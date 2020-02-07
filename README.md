@@ -28,3 +28,7 @@ You can attach /data to save the config created by fail2ban
 `SSMTP_USER`: SMTP username  
 `SSMTP_PASSWORD`: SMTP password  
 `SSMTP_TLS`: SSL/TLS (default `NO`)  
+
+### Use fail2ban client
+
+```docker exec -t <CONTAINER> fail2ban-client status``` 
