@@ -1,4 +1,4 @@
-FROM alpine:3.11
+FROM alpine:3.15
 
 ENV FAIL2BAN_VERSION="0.11.2" \
   TZ="UTC"
@@ -10,9 +10,9 @@ RUN apk --update --no-cache add \
     ip6tables \
     kmod \
     nftables \
+    py3-pip \
     python3 \
     python3-dev \
-    py3-setuptools \
     ssmtp \
     tzdata \
     wget \
