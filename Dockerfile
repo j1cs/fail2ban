@@ -3,8 +3,11 @@ FROM alpine:3.15
 ENV FAIL2BAN_VERSION="0.11.2" \
   TZ="UTC"
 
+ARG FAIL2BAN_VERSION
 RUN apk --update --no-cache add \
+    bash \
     curl \
+    grep \
     ipset \
     iptables \
     ip6tables \
@@ -17,6 +20,11 @@ RUN apk --update --no-cache add \
     tzdata \
     wget \
     whois \
+  && apk --update --no-cache add -t build-dependencies \
+    build-base \
+    py3-pip \
+    py3-setuptools \
+    python3-dev \
   && pip3 install --upgrade pip \
   && pip3 install dnspython3 pyinotify \
   && cd /tmp \
@@ -25,7 +33,8 @@ RUN apk --update --no-cache add \
   && cd fail2ban-${FAIL2BAN_VERSION} \
   && 2to3 -w --no-diffs bin/* fail2ban \
   && python3 setup.py install \
-  && rm -rf /etc/fail2ban/jail.d /var/cache/apk/* /tmp/*
+  && apk del build-dependencies \
+  && rm -rf /etc/fail2ban/jail.d /tmp/*
 
 COPY entrypoint.sh /entrypoint.sh
 
