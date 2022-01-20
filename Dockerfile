@@ -5,9 +5,7 @@ ENV FAIL2BAN_VERSION="0.11.2" \
 
 ARG FAIL2BAN_VERSION
 RUN apk --update --no-cache add \
-    bash \
     curl \
-    grep \
     ipset \
     iptables \
     ip6tables \
